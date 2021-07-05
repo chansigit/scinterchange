@@ -1,16 +1,14 @@
 Package: scinterchange
-Title: Interchange single-cell data objects' formats (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person(given = "Sijie",
-           family = "Chen",
-           role = c("aut", "cre"),
-           email = "chansigit@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Title: Interchange single-cell data objects' formats (One Line, Title
+        Case)
+Version: 0.0.1.0
+Author: Sijie Chen <chansigit@gmail.com>
+Maintainer: Sijie Chen <chansigit@gmail.com>
 Description: Conver Seurat objects to scanpy objects.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: `use_bsd_license()`
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+NeedsCompilation: yes
+Packaged: 2021-07-05 07:45:52 UTC; hcauser

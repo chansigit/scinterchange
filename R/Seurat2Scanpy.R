@@ -1,3 +1,17 @@
+#' Interchangeable single-cell data formats
+#'
+#' Convert a Seurat object to a scanpy object.
+#'
+#' This R function accepts a Seurat object and write a scanpy h5ad file to the disk.
+#'
+#' multiple parameters could be specified to control the conversion behaviour.
+#' @param seu \code{seu} is the seurat object to be converted
+#' @param save_name  \code{save_name} is the prefix of the output file's name.
+#' @param save_embedding \code{save_embedding} shoule be set to TRUE when you
+#' hope put embeddings (e.g. PCA, UMAP) into the converted file.
+#' @return No value returned. an h5ad file is written to the disk.
+#' @author Sijie Chen
+#' @export
 CreateScanpyObject<-function(seu, save_name, save_embedding = TRUE){
     sample <- save_name
     if (save_embedding){
@@ -33,11 +47,12 @@ CreateScanpyObject<-function(seu, save_name, save_embedding = TRUE){
     print(obsPath)
     
     tictoc::tic("converting to scanpy")
-    build_anndata_script=system.file("inst/python/build_anndata.py",package="scinterchange")
+    build_anndata_script=system.file("src/python/build_anndata.py",package="scinterchange")
     reticulate::source_python(file = build_anndata_script)
     build_anndata_from_files(dgePath=dgePath,
                              varPath=varPath,
                              obsPath=obsPath,
-                             output_file=paste(sample, ".h5ad" ,sep=""))
+                             output_file=paste(sample, ".h5ad" ,sep=""),
+                             with_embedding=save_embedding)
     tictoc::toc()
 }
