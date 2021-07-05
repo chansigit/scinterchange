@@ -16,8 +16,8 @@ CreateScanpyObject<-function(seu, save_name, save_embedding = TRUE){
     sample <- save_name
     if (save_embedding){
         tictoc::tic("saving embeddings")
-        dr.umap <- Seurat::Embeddings(seu,reduction ="umap")[rownames(seu@meta.data), 1:2]
-        dr.pca  <- Seurat::Embeddings(seu,reduction ="pca") [rownames(seu@meta.data) ,1:2]
+        dr.umap <- Seurat::Embeddings(object=seu,reduction ="umap")[rownames(seu@meta.data), 1:2]
+        dr.pca  <- Seurat::Embeddings(object=seu,reduction ="pca") [rownames(seu@meta.data) ,1:2]
         seu@meta.data <- cbind(seu@meta.data,dr.umap, dr.pca)        
         tictoc::toc()
     }
@@ -47,7 +47,8 @@ CreateScanpyObject<-function(seu, save_name, save_embedding = TRUE){
     print(obsPath)
     
     tictoc::tic("converting to scanpy")
-    build_anndata_script=system.file("src/python/build_anndata.py",package="scinterchange")
+    build_anndata_script=system.file("python/build_anndata.py",package="scinterchange")
+    message(paste("use python=",build_anndata_script))
     reticulate::source_python(file = build_anndata_script)
     build_anndata_from_files(dgePath=dgePath,
                              varPath=varPath,
