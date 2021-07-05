@@ -40,6 +40,6 @@ CreateScanpyObject(seu, save_name="ilcTemp", save_embedding=TRUE)
 #[1] "/tmp/RtmppZhWii/ilcTemp_obs.tsv"
 #converting to scanpy: 3.623 sec elapsed
 # 
-#you will see ouput file as ilcTemp.h5ad in your working directory.
+#you will see an ouput file as ilcTemp.h5ad in your working directory.
 ```
 
