@@ -45,6 +45,7 @@ CreateScanpyObject(seu, save_name="ilcTemp", save_embedding=TRUE)
 
 ### Convert a Seurat object to a scanpy object (pure reticulate)
 ```R
+# solution from https://theislab.github.io/scanpy-in-R
 library(reticulate)
 use_python("/home/hcauser/anaconda3/envs/r410py37/bin/python", required = T)
 
@@ -62,6 +63,7 @@ adata_seurat$write_h5ad("*****.h5ad")
 
 ### Convert a scanpy object to a Seurat object (pure reticulate)
 ```R
+# solution from https://theislab.github.io/scanpy-in-R
 # first save scanpy object in the h5ad format in python environment
 library(reticulate)
 sc <- import("scanpy")
