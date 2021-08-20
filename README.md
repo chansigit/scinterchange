@@ -43,3 +43,51 @@ CreateScanpyObject(seu, save_name="ilcTemp", save_embedding=TRUE)
 #you will see an ouput file as ilcTemp.h5ad in your working directory.
 ```
 
+### Convert a Seurat object to a scanpy object (pure reticulate)
+```R
+library(reticulate)
+use_python("/home/hcauser/anaconda3/envs/r410py37/bin/python", required = T)
+
+adata_seurat <- sc$AnnData(
+    X   = t(GetAssayData(seurat)),
+    obs = seurat[[]],
+    var = GetAssay(seurat)[[]]
+)
+adata_seurat$obsm$update(umap = Embeddings(seurat, "umap"))
+
+adata_seurat
+
+adata_seurat$write_h5ad("*****.h5ad")
+```
+
+### Convert a scanpy object to a Seurat object (pure reticulate)
+```R
+# first save scanpy object in the h5ad format in python environment
+library(reticulate)
+sc <- import("scanpy")
+adata <- sc$read_h5ad("*******.h5ad")
+adata
+
+exprs <- t(adata$X)
+colnames(exprs) <- adata$obs_names$to_list()
+rownames(exprs) <- adata$var_names$to_list()
+
+# Create the Seurat object
+seurat <- CreateSeuratObject(exprs)
+
+# Set the expression assay
+seurat <- SetAssayData(seurat, "data", exprs)
+
+# Add observation metadata
+seurat <- AddMetaData(seurat, adata$obs)
+
+# Add fetaure metadata
+seurat[["RNA"]][["n_cells"]] <- adata$var["n_cells"]
+
+# Add embedding
+embedding <- adata$obsm["X_umap"]
+rownames(embedding) <- adata$obs_names$to_list()
+colnames(embedding) <- c("umap_1", "umap_2")
+seurat[["umap"]] <- CreateDimReducObject(embedding, key = "umap_")
+```
+
