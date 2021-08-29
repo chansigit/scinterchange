@@ -47,6 +47,7 @@ CreateScanpyObject(seu, save_name="ilcTemp", save_embedding=TRUE)
 ```R
 # solution from https://theislab.github.io/scanpy-in-R
 library(reticulate)
+sc <- import("scanpy")
 use_python("/home/hcauser/anaconda3/envs/r410py37/bin/python", required = T)
 
 adata_seurat <- sc$AnnData(
