@@ -7,7 +7,7 @@ There are many single-cell data formats. We usually need to convert them from on
 **scinterchange** supports conversions:
 
 - from R seurat to python scanpy
-- ...
+- from python scanpy to R seurat
 - 
 
 contact: Sijie Chen (chansigit@gmail.com )
