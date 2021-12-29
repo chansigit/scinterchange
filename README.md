@@ -15,6 +15,7 @@ contact: Sijie Chen (chansigit@gmail.com )
 ---
 
 ## installation
+- Now I do not recommended my scinterchange package, please see the pure reticulate method below (credit to Theis Lab)
 
 - in China `devtools::install_git("https://gitee.com/chansigit/scinterchange.git")`
 
