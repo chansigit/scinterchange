@@ -55,6 +55,12 @@ sc <- import("scanpy")
 adata <- sc$read_h5ad("*******.h5ad")
 adata
 
+## NOTE that if adata$X is a sparse matrix, t() will report an error. 
+## consider densify the matrix first and then transpose
+## `t(as.matrix(adata$X))`
+## or use t_sp() provided by R package bayNorm if the matrix is really big
+## # BiocManager::install("bayNorm")
+## exprs <- bayNorm::t_sp(adata$X)
 exprs <- t(adata$X)
 colnames(exprs) <- adata$obs_names$to_list()
 rownames(exprs) <- adata$var_names$to_list()
