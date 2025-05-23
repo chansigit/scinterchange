@@ -30,8 +30,8 @@ contact: Sijie Chen (chansigit@gmail.com )
 ```R
 # solution from https://theislab.github.io/scanpy-in-R
 library(reticulate)
+use_python('/share/software/user/open/python/3.9.0/bin/python3', required=T)
 sc <- import("scanpy")
-use_python("/home/hcauser/anaconda3/envs/r410py37/bin/python", required = T)
 
 adata_seurat <- sc$AnnData(
     X   = t(GetAssayData(seurat)),
